@@ -1,0 +1,6 @@
+fastapi==0.103.2
+uvicorn==0.23.2
+python-multipart
+pandas
+python-dotenv==1.0.0
+# redis

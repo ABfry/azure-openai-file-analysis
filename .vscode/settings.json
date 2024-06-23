@@ -1,0 +1,30 @@
+{
+  // prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  // 貼り付けを行ったときに自動でフォーマット
+  "editor.formatOnPaste": true,
+
+  // テキストコピー時に書式設定を含める
+  "editor.copyWithSyntaxHighlighting": false,
+
+  // エディター上での空白文字の表示方法
+  "editor.renderWhitespace": "all",
+  // 行の折りたたみ記号の表示方法
+  "editor.showFoldingControls": "always",
+
+  // ファイル保存時に行末に改行を挿入
+  "files.insertFinalNewline": true,
+  // ファイル保存時に最終行以降の空行を削除
+  "files.trimFinalNewlines": true,
+  // ファイル保存時に各行の末尾にある半角スペースを削除
+  "files.trimTrailingWhitespace": true,
+
+  "[python]": {
+    // 1つのタブに相当する半角スペースの数
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.insertSpaces": true
+  }
+}
