@@ -1,6 +1,7 @@
-# GPT4o 画像分析サンプル
+# GPT4o ファイル分析サンプル
 
 AzureOpenAI の GPT4o を使用し入力された画像の説明をさせる
+PDF、PNG、JPEG対応
 
 ## 使用例
 
