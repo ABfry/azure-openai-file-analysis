@@ -6,6 +6,7 @@ import base64
 import re
 
 from openai import AsyncAzureOpenAI
+from util.pdf_to_image import pdf_to_image_byte, is_pdf
 
 dotenv.load_dotenv()
 
@@ -13,9 +14,14 @@ analyze_img_router = APIRouter(prefix="/analyze-img", tags=["image"])
 
 
 @analyze_img_router.post("/api/analyze-img")
-async def analyze_img(image: UploadFile):
-    # 入力された画像データをバイナリ形式で取得
-    image_data = await image.read()
+async def analyze_img(file: UploadFile):
+
+    # PDFの場合は画像に変換
+    if is_pdf(file.filename):
+        image_data = await pdf_to_image_byte(file)
+    else:
+        # 入力された画像データをバイナリ形式で取得
+        image_data = await file.read()
 
     # AzureOpenAIに送信するためにbase64形式に変換
     image_64 = image_to_base64(image_data)
@@ -26,6 +32,8 @@ async def analyze_img(image: UploadFile):
     # AzureOpenAIの呼び出し
     ai = ConversationRunner()
     response = await ai.run(image_64, image_type)
+
+    print(response)
 
     # 結果の抽出
     content = response.choices[0].message.content
@@ -45,7 +53,6 @@ def image_to_base64(image_data: bytes) -> str:
 # バイナリデータから画像形式を判定
 # 参考 : https://xaro.hatenablog.jp/entry/2017/05/17/103000
 def judge_image_type(image_data: bytes) -> str:
-    # JPEG
     if re.match(b"^\xff\xd8", image_data[:2]):
         print("画像形式 : jpeg")
         return "jpeg"
