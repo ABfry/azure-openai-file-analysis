@@ -16,7 +16,6 @@ AzureOpenAI の GPT4o を使用し入力された画像の説明をさせる
 
 ![スクリーンショット 2024-06-23 15 21 40](https://github.com/ABfry/openai-api-image-read/assets/88941921/f21dc63f-b0d0-49a8-a629-b00a5dd4416f)
 
-
 ## つかいかた
 
 ### git clone の実行
@@ -36,7 +35,7 @@ API_KEY と ENDPOINT の取得は https://learn.microsoft.com/ja-jp/azure/ai-ser
 make up(docker-compose up)
 ```
 
-### アクセス
+### FastAPI Docs アクセス
 
 [localhost:8000/docs](localhost:8000/docs)
 
