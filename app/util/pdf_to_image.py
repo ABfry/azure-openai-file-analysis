@@ -1,6 +1,5 @@
 from pdf2image import convert_from_bytes
 from fastapi import File
-import mimetypes
 import io
 
 OUTPUT_FOLDER = "./data"
@@ -22,9 +21,3 @@ async def pdf_to_image_byte(pdf: File):
     img_byte_arr = img_byte_arr.getvalue()
 
     return img_byte_arr
-
-
-# PDFかどうかを判定
-def is_pdf(file_name: str) -> bool:
-    mime = mimetypes.guess_type(file_name)[0]
-    return mime == "application/pdf"
