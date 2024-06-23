@@ -22,7 +22,7 @@ PDF、PNG、JPEG対応
 ### git clone の実行
 
 ```sh
-git clone https://github.com/ABfry/openai-api-image-read.git
+git clone https://github.com/ABfry/azure-openai-file-analysis.git
 ```
 
 ### .env 設定
