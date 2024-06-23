@@ -1,20 +1,19 @@
 from fastapi import APIRouter
 import dotenv
-from fastapi import UploadFile, File
+from fastapi import UploadFile
 import os
 import base64
 import re
-import typing
 
 from openai import AsyncAzureOpenAI
 
 dotenv.load_dotenv()
 
-send_img_router = APIRouter(prefix="/send-img", tags=["image"])
+analyze_img_router = APIRouter(prefix="/analyze-img", tags=["image"])
 
 
-@send_img_router.post("/api/send-img")
-async def send_img(image: UploadFile):
+@analyze_img_router.post("/api/analyze-img")
+async def analyze_img(image: UploadFile):
     # 入力された画像データをバイナリ形式で取得
     image_data = await image.read()
 

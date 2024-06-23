@@ -18,6 +18,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from routers.send_img import send_img_router
+from routers.analyze_img import analyze_img_router
 
-app.include_router(send_img_router)
+app.include_router(analyze_img_router)
