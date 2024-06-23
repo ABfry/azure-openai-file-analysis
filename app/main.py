@@ -18,12 +18,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# サンプルrouter
-from routers.sample import sample_router
+from routers.send_img import send_img_router
 
-app.include_router(sample_router)
-
-
-@app.get("/")
-async def web():
-    return {"test": "success"}
+app.include_router(send_img_router)
