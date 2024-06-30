@@ -22,13 +22,16 @@ async def analyze_img(file: UploadFile):
         image_data = await pdf_to_image_byte(file)
     else:
         # 入力された画像データをバイナリ形式で取得
-        image_data = await file.read()
+        data = await file.read()
+
+        # PDFと形式を合わせるためにリストに変換
+        image_data = [data]
 
     # AzureOpenAIに送信するためにbase64形式に変換
     image_64 = image_to_base64(image_data)
 
-    # 画像形式の判定
-    image_type = judge_image_type(image_data)
+    # 画像形式の判定 最初の要素から
+    image_type = judge_image_type(image_data[0])
 
     # AzureOpenAIの呼び出し
     ai = ConversationRunner()
@@ -45,5 +48,8 @@ async def analyze_img(file: UploadFile):
 
 
 # バイナリデータをbase64形式に変換
-def image_to_base64(image_data: bytes) -> str:
-    return base64.b64encode(image_data).decode("utf-8")
+def image_to_base64(image_data: list[bytes]) -> str:
+    data = []
+    for image in image_data:
+        data.append(base64.b64encode(image).decode("utf-8"))
+    return data
