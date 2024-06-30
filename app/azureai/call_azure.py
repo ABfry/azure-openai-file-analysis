@@ -1,6 +1,5 @@
 from openai import AsyncAzureOpenAI
 import os
-import base64
 
 
 # AzureOpenAIの呼び出し
@@ -12,7 +11,7 @@ class ConversationRunner:
             azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
         )
 
-    async def run(self, image_data: base64, image_type: str):
+    async def run(self, image_data: list[str], image_type: str):
         try:
             response = await self.openai.chat.completions.create(
                 model="gpt-4o",
@@ -23,13 +22,17 @@ class ConversationRunner:
                             {
                                 "type": "text",
                                 "text": "入力された画像について説明してください",
-                            },
+                            }
+                        ]
+                        # 画像データを指定、複数ページあった場合がforで回す
+                        + [
                             {
                                 "type": "image_url",
                                 "image_url": {
-                                    "url": f"data:image/{image_type};base64,{image_data}"
+                                    "url": f"data:image/{image_type};base64,{image}",
                                 },
-                            },
+                            }
+                            for image in image_data
                         ],
                     }
                 ],
