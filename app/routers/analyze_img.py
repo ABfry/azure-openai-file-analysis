@@ -19,6 +19,7 @@ async def analyze_img(file: UploadFile):
 
     # PDFの場合は画像に変換
     if is_pdf(file.filename):
+        print("PDFファイルをjpegに変換します")
         image_data = await pdf_to_image_byte(file)
     else:
         # 入力された画像データをバイナリ形式で取得
